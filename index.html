@@ -9,12 +9,158 @@
 </head>
 
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">Welcome to the Frontend Assessment</h1>
-        <!-- TODO: Implement Task 1 here -->
-        <!-- TODO: Implement Task 2 here -->
-        <!-- TODO: Implement Task 3 here -->
+
+    <!-- ✅ TASK 1: RESPONSIVE NAVIGATION BAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Assessment</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <h1 class="text-center mb-5">Welcome to the Frontend Assessment</h1>
+
+        <!-- ✅ TASK 2: RESPONSIVE CARD GRID -->
+        <div class="row g-4">
+            <!-- Card 1 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100">
+                    <img src="https://placehold.co/600x400/CCCCCC/4f4f4f?text=Feature+1" class="card-img-top" alt="Placeholder Image 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Responsive Design</h5>
+                        <p class="card-text">This card is part of a responsive grid. It will stack on smaller screens thanks to Bootstrap's grid system.</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100">
+                    <img src="https://placehold.co/600x400/DDDDDD/4f4f4f?text=Feature+2" class="card-img-top" alt="Placeholder Image 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Bootstrap Components</h5>
+                        <p class="card-text">This assessment uses various Bootstrap components like navbars, cards, forms, and modals to build a layout.</p>
+                        <a href="#" class="btn btn-primary">Discover</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100">
+                    <img src="https://placehold.co/600x400/EEEEEE/4f4f4f?text=Feature+3" class="card-img-top" alt="Placeholder Image 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Interactive Elements</h5>
+                        <p class="card-text">The contact form below demonstrates how to use JavaScript to create an interactive modal pop-up.</p>
+                        <a href="#" class="btn btn-primary">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ✅ TASK 3: CONTACT FORM -->
+        <div class="row mt-5 justify-content-center">
+            <div class="col-md-8">
+                <h2 class="text-center mb-4">Contact Us</h2>
+                <form id="contactForm">
+                    <!-- Name Input -->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                        <label for="name">Name</label>
+                    </div>
+                    <!-- Email Input -->
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                        <label for="email">Email address</label>
+                    </div>
+                    <!-- Message Textarea -->
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="message" style="height: 100px" required></textarea>
+                        <label for="message">Message</label>
+                    </div>
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary w-100">Submit</button>
+                </form>
+            </div>
+        </div>
     </div>
+
+    <!-- ✅ TASK 4: MODAL -->
+    <!-- This is the HTML structure for the modal. It's hidden by default. -->
+    <div class="modal fade" id="responseModal" tabindex="-1" aria-labelledby="responseModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="responseModalLabel">Form Submission</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal-body-content">
+                    <!-- The user's input will be injected here by JavaScript -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap JS Bundle (includes Popper for tooltips/popovers) -->
+    <!-- This MUST be included for the Navbar toggler and Modal to work. -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript for Task 4 -->
+    <script>
+        // Get the form element
+        const contactForm = document.getElementById('contactForm');
+        // Get the modal body content element
+        const modalBodyContent = document.getElementById('modal-body-content');
+        
+        // Create an instance of the Bootstrap Modal, but don't show it yet
+        const responseModal = new bootstrap.Modal(document.getElementById('responseModal'));
+
+        // Add an event listener for the form's 'submit' event
+        contactForm.addEventListener('submit', function (event) {
+            // 1. Prevent the default form submission behavior (which reloads the page)
+            event.preventDefault();
+
+            // 2. Get the values from the form fields
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // 3. Construct the HTML to display in the modal
+            modalBodyContent.innerHTML = `
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Message:</strong></p>
+                <p>${message}</p>
+            `;
+
+            // 4. Show the modal
+            responseModal.show();
+
+            // Optional: Reset the form after submission
+            contactForm.reset();
+        });
+    </script>
+
 </body>
 
 </html>
